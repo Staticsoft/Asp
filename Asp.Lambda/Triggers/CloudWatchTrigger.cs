@@ -4,7 +4,7 @@ using System.Text.Json;
 
 namespace Staticsoft.Asp.Lambda;
 
-public class RequestTrigger : TriggerSource
+public class CloudWatchTrigger : TriggerSource
 {
     public bool TryConvert(
         JsonElement request,
@@ -13,7 +13,7 @@ public class RequestTrigger : TriggerSource
     )
     {
         proxyRequest = null;
-        if (!request.TryGetProperty("httpMethod", out var _)) return false;
+        if (!request.TryGetProperty("HttpMethod", out var _)) return false;
 
         proxyRequest = JsonSerializer.Deserialize<APIGatewayProxyRequest>(request, options)!;
         return true;
